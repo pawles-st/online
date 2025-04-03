@@ -2,11 +2,10 @@ use std::fmt;
 use std::fs::File;
 use std::io;
 use std::io::{Write, BufWriter};
+use distributions::Generator;
 
-mod distributions;
 mod dynlist;
 
-use distributions::Generator;
 use dynlist::*;
 
 const N: usize = 100000;
@@ -66,10 +65,6 @@ fn measure(list_type: ListType, data_type: DataType, n: usize, reps: usize) -> V
 
     let total_cost = (0..reps).fold(vec![0; n], |mut total_cost, _| {
         let mut compound_cost = 0;
-
-        if list_type == ListType::Simple {
-            println!("{}", list);
-        }
 
         for i in 0..n {
             let val = generate(&mut g, data_type);
