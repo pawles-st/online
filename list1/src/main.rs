@@ -83,13 +83,9 @@ fn measure(list_type: ListType, data_type: DataType, n: usize, reps: usize) -> V
 }
 
 fn write_vec_to_file<T: fmt::Display>(vec: Vec<T>, filename: &str) -> std::io::Result<()> {
-    // Create or open the file
     let file = File::create(filename)?;
-    
-    // Use BufWriter for efficient writing
     let mut writer = BufWriter::new(file);
 
-    // Write each element to the file, one per line
     for value in vec {
         writeln!(writer, "{}", value)?;
     }
