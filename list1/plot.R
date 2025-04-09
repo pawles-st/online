@@ -7,7 +7,7 @@ list.types = c("FC", "MTF", "Simple", "TP")
 for (datatype in c("Uniform", "Harmonic", "Biharmonic", "Geometric")) {
 	file.pattern <- paste0("result_.*_", datatype, "\\.txt")
 
-	files <- list.files(pattern = file.pattern, full.names = TRUE)
+	files <- list.files(path = "results", pattern = file.pattern, full.names = TRUE)
 	print(files)
 
 	y.list <- list()

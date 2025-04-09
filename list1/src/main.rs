@@ -97,7 +97,7 @@ fn main() -> io::Result<()> {
     for list_type in [ListType::Simple, ListType::TP, ListType::MTF, ListType::FC] {
         for data_type in [DataType::Uniform, DataType::Harmonic, DataType::Biharmonic, DataType::Geometric] {
             let cost = measure(list_type, data_type, N, REPS);
-            let filename = format!("result_{}_{}.txt", list_type, data_type);
+            let filename = format!("results/result_{}_{}.txt", list_type, data_type);
             write_vec_to_file(cost, &filename)?
         }
     }
