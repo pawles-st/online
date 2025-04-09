@@ -53,7 +53,7 @@ fn generate(g: &mut Generator, t: DataType) -> usize {
     }
 }
 
-fn measure(list_type: ListType, data_type: DataType, n: usize, reps: usize) -> Vec<usize> {
+fn measure(list_type: ListType, data_type: DataType, n: usize, reps: usize) -> Vec<f64> {
     let mut g = Generator::new(NO_ELEMS);
 
     let mut list: Box<dyn Dynlist<usize>> = match list_type {
@@ -78,11 +78,11 @@ fn measure(list_type: ListType, data_type: DataType, n: usize, reps: usize) -> V
 
     total_cost
         .iter()
-        .map(|v| v / reps)
+        .map(|v| *v as f64 / reps as f64)
         .collect()
 }
 
-fn write_vec_to_file(vec: Vec<usize>, filename: &str) -> std::io::Result<()> {
+fn write_vec_to_file<T: fmt::Display>(vec: Vec<T>, filename: &str) -> std::io::Result<()> {
     // Create or open the file
     let file = File::create(filename)?;
     
