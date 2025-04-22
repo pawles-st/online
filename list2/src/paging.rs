@@ -1,34 +1,6 @@
-//use std::ops::{Index, IndexMut};
 use rand::distributions::{Distribution, Uniform};
 use rand::Rng;
 use rand::rngs::ThreadRng;
-
-/*
- *#[derive(Debug)]
- *struct Cache<T: Clone> {
- *    pages: Vec<Option<T>>,
- *}
- *
- *impl<T: Clone> Cache<T> {
- *    pub fn new(size: usize) -> Self {
- *        Self{pages: vec![None; size]}
- *    }
- *}
- *
- *impl<T: Clone> Index<usize> for Cache<T> {
- *    type Output = Option<T>;
- *
- *    fn index(&self, index: usize) -> &Self::Output {
- *        &self.pages[index]
- *    }
- *}
- *
- *impl<T: Clone> IndexMut<usize> for Cache<T> {
- *    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
- *        &mut self.pages[index]
- *    }
- *}
- */
 
 pub trait CacheStrategy<T> {
     fn access(&mut self, page: T) -> usize;
@@ -37,7 +9,6 @@ pub trait CacheStrategy<T> {
 #[derive(Debug)]
 pub struct FIFO {
     cache: Vec<usize>,
-    //cache: Cache<T>,
     size: usize,
     index: usize,
 }
