@@ -62,7 +62,7 @@ fn measure(cache_type: CacheType, data_type: DataType, n: usize, k: usize, reque
     let mut g = Generator::new(n);
 
     let total_cost = (0..reps).fold(vec![0; requests], |mut total_cost, _| {
-        let mut cache: Box<dyn CacheStrategy<usize>> = match cache_type {
+        let mut cache: Box<dyn Cacher<usize>> = match cache_type {
             CacheType::FIFO => Box::new(FIFO::new(k)),
             CacheType::FWF => Box::new(FWF::new(k)),
             CacheType::LRU => Box::new(LRU::new(k)),

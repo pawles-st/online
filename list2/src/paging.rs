@@ -2,7 +2,7 @@ use rand::distributions::{Distribution, Uniform};
 use rand::Rng;
 use rand::rngs::ThreadRng;
 
-pub trait CacheStrategy<T> {
+pub trait Cacher<T> {
     fn access(&mut self, page: T) -> usize;
 }
 
@@ -23,7 +23,7 @@ impl FIFO {
     }
 }
 
-impl CacheStrategy<usize> for FIFO {
+impl Cacher<usize> for FIFO {
     fn access(&mut self, page: usize) -> usize {
         match self.cache.iter().position(|&v| v == page) {
             Some(_) => 0,
@@ -53,7 +53,7 @@ impl FWF {
     }
 }
 
-impl CacheStrategy<usize> for FWF {
+impl Cacher<usize> for FWF {
     fn access(&mut self, page: usize) -> usize {
         match self.cache.iter().position(|&v| v == page) {
             Some(_) => 0,
@@ -83,7 +83,7 @@ impl LRU {
     }
 }
 
-impl CacheStrategy<usize> for LRU {
+impl Cacher<usize> for LRU {
     fn access(&mut self, page: usize) -> usize {
         match self.cache.iter().position(|&v| v == page) {
             Some(i) => {
@@ -115,7 +115,7 @@ impl LFU {
     }
 }
 
-impl CacheStrategy<usize> for LFU {
+impl Cacher<usize> for LFU {
     fn access(&mut self, page: usize) -> usize {
         if page >= self.count.len() {
             self.count.resize(page + 1, 0);
@@ -159,7 +159,7 @@ impl RAND {
     }
 }
     
-impl CacheStrategy<usize> for RAND {
+impl Cacher<usize> for RAND {
     fn access(&mut self, page: usize) -> usize {
         match self.cache.iter().position(|&v| v == page) {
             Some(_) => 0,
@@ -196,7 +196,7 @@ impl RMA {
     }
 }
 
-impl CacheStrategy<usize> for RMA {
+impl Cacher<usize> for RMA {
     fn access(&mut self, page: usize) -> usize {
         match self.cache.iter().position(|(v, _)| *v == page) {
             Some(i) => {
