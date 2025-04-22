@@ -56,14 +56,14 @@ fn generate(g: &mut Generator, t: DataType) -> usize {
 fn measure(list_type: ListType, data_type: DataType, n: usize, reps: usize) -> Vec<f64> {
     let mut g = Generator::new(NO_ELEMS);
 
-    let mut list: Box<dyn Dynlist<usize>> = match list_type {
-        ListType::Simple => Box::new(SimpleList::new()),
-        ListType::TP => Box::new(TPList::new()),
-        ListType::MTF => Box::new(MTFList::new()),
-        ListType::FC => Box::new(FCList::new()),
-    };
-
     let total_cost = (0..reps).fold(vec![0; n], |mut total_cost, _| {
+        let mut list: Box<dyn Dynlist<usize>> = match list_type {
+            ListType::Simple => Box::new(SimpleList::new()),
+            ListType::TP => Box::new(TPList::new()),
+            ListType::MTF => Box::new(MTFList::new()),
+            ListType::FC => Box::new(FCList::new()),
+        };
+
         let mut compound_cost = 0;
 
         for i in 0..n {
