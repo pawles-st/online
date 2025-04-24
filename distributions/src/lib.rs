@@ -57,4 +57,8 @@ impl Generator {
         let p = self.std.sample(&mut self.rng);
         usize::min(self.n, f64::floor(-f64::log2(1.0 - p)) as usize) + 1
     }
+
+    pub fn std(&mut self) -> f64 {
+        self.std.sample(&mut self.rng)
+    }
 }
