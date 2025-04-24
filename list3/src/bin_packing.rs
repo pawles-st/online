@@ -8,6 +8,7 @@ pub enum PackError {
 
 pub trait Packer<T> {
     fn pack(&mut self, item: T) -> Result<(), PackError>;
+    fn no_bins(&self) -> usize;
 }
 
 pub struct NextFit {
@@ -21,10 +22,6 @@ impl NextFit {
             no_bins: 0,
             bin_space: 0.0,
         }
-    }
-
-    pub fn no_bins(&self) -> usize {
-        self.no_bins
     }
 }
 
@@ -43,6 +40,10 @@ impl Packer<f64> for NextFit {
 
         Ok(())
     }
+
+    fn no_bins(&self) -> usize {
+        self.no_bins
+    }
 }
 
 pub struct RandomFit {
@@ -56,10 +57,6 @@ impl RandomFit {
             bins: Vec::new(),
             rng: rand::thread_rng(),
         }
-    }
-
-    pub fn no_bins(&self) -> usize {
-        self.bins.len()
     }
 }
 
@@ -82,6 +79,10 @@ impl Packer<f64> for RandomFit {
 
         Ok(())
     }
+
+    fn no_bins(&self) -> usize {
+        self.bins.len()
+    }
 }
 
 pub struct FirstFit {
@@ -93,10 +94,6 @@ impl FirstFit {
         Self {
             bins: Vec::new(),
         }
-    }
-
-    pub fn no_bins(&self) -> usize {
-        self.bins.len()
     }
 }
 
@@ -118,6 +115,10 @@ impl Packer<f64> for FirstFit {
 
         Ok(())
     }
+
+    fn no_bins(&self) -> usize {
+        self.bins.len()
+    }
 }
 
 pub struct BestFit {
@@ -129,10 +130,6 @@ impl BestFit {
         Self {
             bins: Vec::new(),
         }
-    }
-
-    pub fn no_bins(&self) -> usize {
-        self.bins.len()
     }
 }
 
@@ -155,6 +152,10 @@ impl Packer<f64> for BestFit {
 
         Ok(())
     }
+
+    fn no_bins(&self) -> usize {
+        self.bins.len()
+    }
 }
 
 pub struct WorstFit {
@@ -166,10 +167,6 @@ impl WorstFit {
         Self {
             bins: Vec::new(),
         }
-    }
-
-    pub fn no_bins(&self) -> usize {
-        self.bins.len()
     }
 }
 
@@ -191,5 +188,9 @@ impl Packer<f64> for WorstFit {
         }
 
         Ok(())
+    }
+
+    fn no_bins(&self) -> usize {
+        self.bins.len()
     }
 }
