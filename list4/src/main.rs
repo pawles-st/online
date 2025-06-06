@@ -1,14 +1,12 @@
 use distributions::Generator;
+use metricgraph::*;
 use std::fs::File;
 use std::fmt;
 use std::io;
 use std::io::BufWriter;
 use std::io::Write;
 
-mod graphs;
 mod migration;
-
-use graphs::*;
 use migration::*;
 
 const REPS: usize = 100;

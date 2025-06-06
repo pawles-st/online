@@ -37,8 +37,13 @@ name = "list4"
 version = "0.1.0"
 dependencies = [
  "distributions",
+ "metricgraph",
  "rand",
 ]
+
+[[package]]
+name = "metricgraph"
+version = "0.1.0"
 
 [[package]]
 name = "ppv-lite86"

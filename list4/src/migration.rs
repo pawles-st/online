@@ -1,9 +1,8 @@
+use metricgraph::*;
 use rand::distributions::{Distribution, Uniform};
 use rand::rngs::ThreadRng;
 use rand::thread_rng;
 
-use crate::graphs::MetricGraph;
-use crate::graphs::IndexErr;
 
 pub trait PageMigration {
     fn read(&mut self, source: usize) -> Result<usize, IndexErr>;
