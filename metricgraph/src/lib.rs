@@ -55,3 +55,22 @@ impl<const D: u8> MetricGraph for Torus<D> {
     }
 }
 
+pub struct Unitary {
+    size: usize
+}
+
+impl Unitary {
+    pub fn new(size: usize) -> Self {
+        Self { size }
+    }
+}
+
+impl MetricGraph for Unitary {
+    fn distance(&self, x: usize, y: usize) -> Result<usize, IndexErr> {
+        if x >= self.length.pow(D as u32) || y >= self.length.pow(D as u32) {
+            return Err(IndexErr::InvalidIndex);
+        }
+
+        Ok(1)
+    }
+}
