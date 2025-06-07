@@ -71,7 +71,11 @@ impl MetricGraph for Unitary {
             return Err(IndexErr::InvalidIndex);
         }
 
-        Ok(1)
+        if x == y {
+            Ok(0)
+        } else {
+            Ok(1)
+        }
     }
 
     fn size(&self) -> usize {
