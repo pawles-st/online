@@ -9,7 +9,6 @@ for (datatype in c("Uniform", "Harmonic", "Biharmonic")) {
 	for (d in c(2, 16, 128, 2048)) {
 		file.pattern <- paste0("result_.*_.*_", datatype, "_", d, "\\.txt")
 		files <- list.files(path = "results", pattern = file.pattern, full.names = TRUE)
-		print(files)
 
 		y.list <- list()
 		for (i in seq_along(files)) {
