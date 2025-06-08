@@ -61,4 +61,12 @@ impl Generator {
     pub fn std(&mut self) -> f64 {
         self.std.sample(&mut self.rng)
     }
+
+    pub fn bernoulli(&mut self, p: f64) -> usize {
+        if self.std() < p {
+            1
+        } else {
+            0
+        }
+    }
 }
